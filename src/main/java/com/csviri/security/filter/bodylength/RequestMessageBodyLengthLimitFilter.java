@@ -26,7 +26,7 @@ import static com.csviri.security.filter.bodylength.RequestMessageBodyLengthLimi
 
 @WebFilter(filterName = "RequestMessageBodyLengthLimitFilter",
 		initParams = {
-				@WebInitParam(name = MAX_MESSAGE_BODY_LENGTH_PARAM, value = "52428800", description = "Limit the maximal length of content. (-1 to turn off)"),
+				@WebInitParam(name = MAX_MESSAGE_BODY_LENGTH_PARAM, value = "1048576", description = "Limit the maximal length of content. (-1 to turn off)"),
 				@WebInitParam(name = ALLOW_CHUNKED_TRANSFER_PARAM, value = "false")
 		})
 public class RequestMessageBodyLengthLimitFilter implements Filter {
