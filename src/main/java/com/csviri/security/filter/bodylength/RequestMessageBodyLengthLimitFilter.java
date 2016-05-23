@@ -31,7 +31,7 @@ import static com.csviri.security.filter.bodylength.RequestMessageBodyLengthLimi
 		})
 public class RequestMessageBodyLengthLimitFilter implements Filter {
 
-	private final static org.slf4j.Logger log = LoggerFactory.getLogger(RequestMessageBodyLengthLimitFilter.class);
+	private static final org.slf4j.Logger log = LoggerFactory.getLogger(RequestMessageBodyLengthLimitFilter.class);
 
 	static final String ALLOW_CHUNKED_TRANSFER_PARAM = "allowChunkedTransfer";
 	static final String MAX_MESSAGE_BODY_LENGTH_PARAM = "maxMessageBodyLength";
