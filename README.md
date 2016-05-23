@@ -1,7 +1,7 @@
 # HTTP Request Message Body Length Limit Filter
 
 Servlet Filter that limits the size of the http request message body.
-Rejects a Http request (with status code 413) if its body is biger then the one specified as param.
+Rejects a Http request (with status code 413) if its body is bigger then the one specified as param.
 
 #### Introduction
 The purpose of the filter is to prevent the client to post too large http requests, that can cause some memory issues on server. This is done by checking the Content-Length header of the request (see chunked transfer below). Note that servlet containers like Tomcat, does not limit this, its the responsibility of the application.
