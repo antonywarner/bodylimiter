@@ -15,4 +15,4 @@ The purpose of the filter is to prevent the client to post too large http reques
 - It applies only on http methods: POST, PUT, OPTIONS, DELETE, PATCH. Other methods are ignored.
 
 #### Notes
-- Tomcat has a *maxPostSize* attribute on connectors, but this limits just certain kind of posts, see post on [stack overflow](http://stackoverflow.com/questions/14075287/does-maxpostsize-apply-to-multipart-form-data-file-uploads)
+- Tomcat has a *maxPostSize* [attribute](https://tomcat.apache.org/tomcat-8.0-doc/config/http.html) on connectors, but this limits just certain kind of posts, see post on [stack overflow](http://stackoverflow.com/questions/14075287/does-maxpostsize-apply-to-multipart-form-data-file-uploads)
