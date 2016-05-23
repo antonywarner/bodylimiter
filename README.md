@@ -7,8 +7,8 @@ Rejects a Http request (with status code 413) if its body is biger then the one 
 The purpose of the filter is to prevent the client to post too large http requests, that can cause some memory issues on server. This is done by checking the Content-Length header of the request (see chunked transfer below). Note that servlet containers like Tomcat, does not limit this, its the responsibility of the application.
 
 #### Filter Parameters:
-- **maxMessageBodyLength** - maximal number of bytes of a http request. (default is 52428800 (50MB))
-- **allowChunkedTransfer** - true/false - chunked transfer can be explicitly rejected (with status code 411), since you cannot determine the length of the request. If the chunked request is allowed, it still counts the bytes from the request, and applies the maxMessageBodyLength constraint.
+- **maxMessageBodyLength** - maximal length of message body of http request in bytes. (default is 52428800 (50MB))
+- **allowChunkedTransfer** - true/false - (default is false); Chunked transfer can be explicitly rejected (with status code 411), since you cannot determine the length of the request. If the chunked request is allowed, it still counts the bytes from the request, and applies the maxMessageBodyLength constraint.
 
 #### Additional Behaviour:
 - If the Content-Length header is not present in (non chunked) request, its automatically rejected (411).
