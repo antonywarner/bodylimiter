@@ -74,10 +74,10 @@ public class RequestMessageBodyLengthLimitFilter implements Filter {
 		Long contentLength = getContentLength(httpRequest);
 		if (contentLength == null) {
 			log.debug("No Content-Length header in request. Rejecting request on: {}", httpRequest.getRequestURL());
-			httpResponse.setStatus(CONTENT_LENGTH_REQUIRED_STATUS);
+			resetRespAndSetStatus(httpResponse, CONTENT_LENGTH_REQUIRED_STATUS);
 		} else if (isMaxLengthSet() && maxContentLength < contentLength) {
 			log.info("Content too Large:{} Max:{}. Rejecting request on:{}", new Object[]{contentLength, maxContentLength, httpRequest.getRequestURL()});
-			httpResponse.setStatus(TOO_LARGE_STATUS);
+			resetRespAndSetStatus(httpResponse, TOO_LARGE_STATUS);
 		} else {
 			chain.doFilter(httpRequest, httpResponse);
 		}
@@ -88,7 +88,7 @@ public class RequestMessageBodyLengthLimitFilter implements Filter {
 		// Therefore we give a possibility to reject these requests automatically.
 		if (!allowChunkedTransfer) {
 			log.warn("Chunked Transfer not allowed. Rejecting request on: {}", httpRequest.getRequestURL());
-			httpResponse.setStatus(CONTENT_LENGTH_REQUIRED_STATUS);
+			resetRespAndSetStatus(httpResponse,CONTENT_LENGTH_REQUIRED_STATUS);
 			return;
 		}
 		doBodyLengthValidationInForChunkedRequest(httpRequest, httpResponse, chain);
@@ -105,7 +105,7 @@ public class RequestMessageBodyLengthLimitFilter implements Filter {
 			} else {
 				log.warn("Invalid content length on request on url: " + httpRequest.getRequestURL(),
 						ExceptionUtils.getThrowableList(e).get(index));
-				httpResponse.setStatus(TOO_LARGE_STATUS);
+				resetRespAndSetStatus(httpResponse,TOO_LARGE_STATUS);
 			}
 		}
 	}
@@ -128,6 +128,11 @@ public class RequestMessageBodyLengthLimitFilter implements Filter {
 
 	private boolean isMaxLengthSet() {
 		return maxContentLength > -1;
+	}
+
+	private void resetRespAndSetStatus(HttpServletResponse response, int status) {
+		response.reset();
+		response.setStatus(status);
 	}
 
 	@Override
