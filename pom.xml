@@ -3,10 +3,12 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<name>Request MessageBody Length Limit Filter</name>
+	<packaging>jar</packaging>
+	
 	<groupId>com.csviri.tools</groupId>
 	<artifactId>bodylimiter</artifactId>
-	<name>Request MessageBody Length Limit Filter</name>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 	<description>
 		Filter that limits the maximal size of the body of a http request message.
