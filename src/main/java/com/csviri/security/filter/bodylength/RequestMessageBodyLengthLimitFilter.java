@@ -48,6 +48,14 @@ public class RequestMessageBodyLengthLimitFilter implements Filter {
 	private long maxContentLength;
 	private boolean allowChunkedTransfer;
 
+	public RequestMessageBodyLengthLimitFilter() {		
+	}
+
+	public RequestMessageBodyLengthLimitFilter(long maxContentLength, boolean allowChunkedTransfer) {
+		this.maxContentLength = maxContentLength;
+		this.allowChunkedTransfer = allowChunkedTransfer;
+	}
+
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		maxContentLength = Long.parseLong(filterConfig.getInitParameter(MAX_MESSAGE_BODY_LENGTH_PARAM));
