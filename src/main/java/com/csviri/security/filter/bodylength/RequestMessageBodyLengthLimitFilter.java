@@ -87,7 +87,19 @@ public class RequestMessageBodyLengthLimitFilter implements Filter {
 			log.info("Content too Large:{} Max:{}. Rejecting request on:{}", new Object[]{contentLength, maxContentLength, httpRequest.getRequestURL()});
 			resetRespAndSetStatus(httpResponse, TOO_LARGE_STATUS);
 		} else {
-			chain.doFilter(httpRequest, httpResponse);
+			try {
+				CountingRequestWrapper countingRequestWrapper = new CountingRequestWrapper(httpRequest, maxContentLength);
+				chain.doFilter(countingRequestWrapper, httpResponse);
+			} catch (Exception e) {
+				int index = ExceptionUtils.indexOfThrowable(e, InvalidContentLengthException.class);
+				if (index == -1) {
+					throw new ServletException(e);
+				} else {
+					log.warn("Invalid content length on request on url: " + httpRequest.getRequestURL(),
+							ExceptionUtils.getThrowableList(e).get(index));
+					resetRespAndSetStatus(httpResponse,TOO_LARGE_STATUS);
+				}
+			}
 		}
 	}
 

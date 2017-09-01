@@ -23,8 +23,8 @@ class RequestMessageBodyLengthLimitFilterSpec extends Specification {
         filter.doFilter(request, response, chain)
         then:
         1 * chain.doFilter(_ as HttpServletRequest, _ as HttpServletResponse) >> { args -> args[0].getInputStream().eachByte({}) }
-		1 * response.reset();
-		1 * response.setStatus(413);
+		1 * response.reset()
+		1 * response.setStatus(413)
     }
 
 	def 'Request rejected if Content-Length is too large'() {
@@ -39,8 +39,8 @@ class RequestMessageBodyLengthLimitFilterSpec extends Specification {
 		when:
 		filter.doFilter(request, response, chain)
 		then:
-		1 * response.reset();
-		1 * response.setStatus(413);
+		1 * response.reset()
+		1 * response.setStatus(413)
 	}
 
 	def 'Request rejected if Content-Length is null'() {
@@ -53,8 +53,8 @@ class RequestMessageBodyLengthLimitFilterSpec extends Specification {
 		when:
 		filter.doFilter(request, response, chain)
 		then:
-		1 * response.reset();
-		1 * response.setStatus(411);
+		1 * response.reset()
+		1 * response.setStatus(411)
 	}
 
     def 'Request size within limits passes'() {
@@ -72,8 +72,8 @@ class RequestMessageBodyLengthLimitFilterSpec extends Specification {
         then:
         1 * chain.doFilter(_ as HttpServletRequest, _ as HttpServletResponse)
         noExceptionThrown()
-		0 * response.reset();
-		0 * response.setStatus(_);
+		0 * response.reset()
+		0 * response.setStatus(_ as int)
     }
 
     static ServletInputStream generateByteStream(int size) {
