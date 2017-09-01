@@ -1,5 +1,7 @@
 # HTTP Request Message Body Length Limit Filter
 
+[![Travis CI Build Status](https://travis-ci.org/antonywarner/bodylimiter.png)](https://travis-ci.org/antonywarner/bodylimiter)
+
 Servlet Filter that limits the size of the http request message body.
 Rejects a Http request (with status code 413) if its body is bigger then the one specified as param.
 
