@@ -1,11 +1,15 @@
 package com.csviri.security.filter.bodylength;
 
 
+import static com.csviri.security.filter.bodylength.RequestMessageBodyLengthLimitFilter.ALLOW_CHUNKED_TRANSFER_PARAM;
+import static com.csviri.security.filter.bodylength.RequestMessageBodyLengthLimitFilter.MAX_MESSAGE_BODY_LENGTH_PARAM;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -19,9 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.LoggerFactory;
-
-import static com.csviri.security.filter.bodylength.RequestMessageBodyLengthLimitFilter.ALLOW_CHUNKED_TRANSFER_PARAM;
-import static com.csviri.security.filter.bodylength.RequestMessageBodyLengthLimitFilter.MAX_MESSAGE_BODY_LENGTH_PARAM;
 
 
 @WebFilter(filterName = "RequestMessageBodyLengthLimitFilter",
@@ -51,7 +52,8 @@ public class RequestMessageBodyLengthLimitFilter implements Filter {
 	public RequestMessageBodyLengthLimitFilter() {		
 	}
 
-	public RequestMessageBodyLengthLimitFilter(long maxContentLength, boolean allowChunkedTransfer) {
+	@Inject
+	public RequestMessageBodyLengthLimitFilter(Long maxContentLength, Boolean allowChunkedTransfer) {
 		this.maxContentLength = maxContentLength;
 		this.allowChunkedTransfer = allowChunkedTransfer;
 	}
