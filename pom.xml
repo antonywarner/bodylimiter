@@ -8,7 +8,7 @@
 	
 	<groupId>com.csviri.tools</groupId>
 	<artifactId>bodylimiter</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 
 	<description>
 		Filter that limits the maximal size of the body of a http request message.
